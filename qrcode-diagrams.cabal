@@ -1,0 +1,33 @@
+name:                qrcode-diagrams
+version:             0.1
+synopsis:            Draw QR codes to SVG, PNG, PDF or PS files.
+homepage:            TBA
+license:             BSD3
+license-file:        LICENSE
+author:              Felipe Lessa <felipe.lessa@loyful.com>
+maintainer:          Felipe Lessa <felipe.lessa@loyful.com>
+copyright:           (c) 2012-2013 Loyful <opensource@loyful.com>
+category:            Graphics
+build-type:          Simple
+cabal-version:       >=1.8
+description:
+  This library is able to draw diagrams of QR codes using the
+  @diagrams@ library.  In order to create the QR code itself, use
+  the @qrcode@ library.  In order to draw and save the diagram to
+  a file, we suggest using either the @diagrams-svg@ library
+  (pure Haskell, fast, SVG output only) or the @diagrams-cairo@
+  library (requires Cairo, supports many different output
+  targets, including SVG, PNG, PDF, PS and directly onto a GUI).
+  .
+  For an example of how this library may be used, please see the
+  examples on the source code.
+
+library
+  exposed-modules:
+    Diagrams.QRCode
+  build-depends:
+    base          >= 4.5 && < 4.7
+    qrcode        == 0.1.*
+    diagrams-core == 0.6.*
+    diagrams-lib  == 0.6.*
+  hs-source-dirs: src/

@@ -1,0 +1,1 @@
+module Diagrams.QRCode () where
