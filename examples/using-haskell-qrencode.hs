@@ -14,7 +14,7 @@ main = do
   qrcode <- QR.encodeString input Nothing QR.QR_ECLEVEL_M QR.QR_MODE_EIGHT True
 
   -- Draw QR code
-  let dia = QR.stroke $ D.scale 6 $ QR.pathMatrix $ QR.toMatrix qrcode
+  let dia = D.scale 6 $ QR.stroke $ QR.pathMatrix $ QR.toMatrix qrcode
 
   -- Render diagram
   L8.putStrLn $ renderSvg $ D.renderDia D.SVG (D.SVGOptions D.Absolute) dia

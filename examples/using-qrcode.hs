@@ -15,7 +15,7 @@ main = do
       Just qrcode = QR.encode ver QR.M QR.Alphanumeric input
 
   -- Draw QR code
-  let dia = QR.stroke $ D.scale 6 $ QR.pathArray $ fmap not $ QR.toArray qrcode
+  let dia = D.scale 6 $ QR.stroke $ QR.pathArray $ fmap not $ QR.toArray qrcode
 
   -- Render diagram
   L8.putStrLn $ renderSvg $ D.renderDia D.SVG (D.SVGOptions D.Absolute) dia

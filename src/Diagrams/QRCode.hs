@@ -11,9 +11,19 @@ import qualified Diagrams.Path as D
 import qualified Diagrams.TwoD as D
 
 
--- | Stroke using default QR code colors (black on white).
-stroke :: D.Renderable (D.Path D.R2) b => D.Path D.R2 -> D.Diagram b D.R2
-stroke = D.bg white . D.fc black . D.lw 0 . D.stroke
+-- | Stroke using default QR code colors (black on white) and
+-- with the \"quiet\" region.
+stroke :: (D.Backend b D.R2, D.Renderable (D.Path D.R2) b) => D.Path D.R2 -> D.Diagram b D.R2
+stroke = D.bg white . quiet . D.fc black . D.lw 0 . D.stroke
+  where
+    zoneX = D.strutX 4
+    zoneY = D.strutY 4
+    quiet d =
+                  zoneY
+                  D.===
+       (zoneX D.||| d D.||| zoneX)
+                  D.===
+                  zoneY
 
 
 -- | Convert a QR code represented as a list of bounded values
