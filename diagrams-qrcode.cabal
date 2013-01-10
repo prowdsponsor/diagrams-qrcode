@@ -1,4 +1,4 @@
-name:                qrcode-diagrams
+name:                diagrams-qrcode
 version:             0.1
 synopsis:            Draw QR codes to SVG, PNG, PDF or PS files.
 homepage:            TBA
