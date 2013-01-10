@@ -26,8 +26,9 @@ library
   exposed-modules:
     Diagrams.QRCode
   build-depends:
-    base          >= 4.5 && < 4.7
-    qrcode        == 0.1.*
-    diagrams-core == 0.6.*
-    diagrams-lib  == 0.6.*
+      base          >= 4.5 && < 4.7
+    , array
+    , qrcode        == 0.1.*
+    , diagrams-core == 0.6.*
+    , diagrams-lib  == 0.6.*
   hs-source-dirs: src/
