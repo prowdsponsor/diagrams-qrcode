@@ -1,26 +1,45 @@
-module Diagrams.QRCode (draw, path) where
+{-# LANGUAGE FlexibleContexts #-}
+module Diagrams.QRCode (pathList, pathMatrix, pathArray, stroke) where
 
 import Control.Arrow ((***))
-import Data.Array (assocs)
+import Data.Array (assocs, Array, Ix)
+import Data.Colour.Names (black, white)
 import Data.Monoid (mempty)
-import Diagrams.TwoD ( p2, square, stroke,  toTrail
-                     , Path(..), QDiagram, R2, Trail )
-import Codec.Binary.QRCode (toArray, Matrix, Module(..))
+import qualified Diagrams.Attributes as D
+import qualified Diagrams.Core as D
+import qualified Diagrams.Path as D
+import qualified Diagrams.TwoD as D
 
 
--- | Draw a QR code 'Matrix' into a 'QDiagram'.
-draw :: Matrix -> QDiagram b R2 m
-draw = stroke . path
+-- | Stroke using default QR code colors (black on white).
+stroke :: D.Renderable (D.Path D.R2) b => D.Path D.R2 -> D.Diagram b D.R2
+stroke = D.bg white . D.fc black . D.lw 0 . D.stroke
 
 
--- | Convert a QR code 'Matrix' into a 'Path'.
-path :: Matrix -> Path R2
-path = Path                  -- convert to Path R2
-     . fmap (p2 *** toTrail) -- convert to [(P2, Trail R2)]
-     . assocs . toArray      -- convert to [((Int, Int), Module)]
+-- | Convert a QR code represented as a list of bounded values
+-- into a 'Path'.  'minBound' values are considered to be
+-- \"off\", while every other value is considered to be \"on\".
+pathList :: (Bounded a, Eq a, Integral ix) => [((ix, ix), a)] -> D.Path D.R2
+pathList = D.Path . fmap (p2int *** toTrail)
+  where p2int = D.p2 . (fromIntegral *** fromIntegral)
 
 
--- | Convert a 'Module' to a 'Trail'.
-toTrail :: Module -> Trail R2
-toTrail Light = mempty
-toTrail Dark  = square 1
+-- | Same as 'pathList', but from a matrix represented as a list
+-- of lists.
+pathMatrix :: (Bounded a, Eq a) => [[a]] -> D.Path D.R2
+pathMatrix matrix =
+  pathList $ do
+    (r, row) <- count matrix
+    (c, val) <- count row
+    return ((r,c), val)
+  where count = zip [(0::Int)..]
+
+
+-- | Same as 'pathList', but from an array.
+pathArray :: (Bounded a, Eq a, Integral ix, Ix ix) => Array (ix, ix) a -> D.Path D.R2
+pathArray = pathList . assocs
+
+
+-- | Convert a value into a 'Trail'.
+toTrail :: (Bounded a, Eq a) => a -> D.Trail D.R2
+toTrail x = if x == minBound then mempty else D.square 1
