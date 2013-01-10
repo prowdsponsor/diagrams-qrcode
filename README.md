@@ -14,7 +14,7 @@ GUI).
 For example:
 
 ```
-$ cabal install
+$ cabal install diagrams-qrcode haskell-qrencode diagrams-svg diagrams
 $ cd examples/
 $ echo 'https://github.com/meteficha/diagrams-qrcode/' | \
   runhaskell using-haskell-qrencode.hs > qrcode.svg
