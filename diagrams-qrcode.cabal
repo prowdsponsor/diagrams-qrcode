@@ -1,5 +1,5 @@
 name:                diagrams-qrcode
-version:             1.0
+version:             1.0.1
 synopsis:            Draw QR codes to SVG, PNG, PDF or PS files.
 homepage:            https://github.com/meteficha/diagrams-qrcode
 license:             BSD3
@@ -23,6 +23,11 @@ description:
   .
   For an example of how this library may be used, please see the
   examples on the source code.
+extra-source-files:
+  README.md
+  examples/using-haskell-qrencode.hs
+  examples/using-qrcode.hs
+  examples/qrcode.svg
 
 source-repository head
   type:     git
