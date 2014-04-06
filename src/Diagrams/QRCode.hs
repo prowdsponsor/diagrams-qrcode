@@ -7,7 +7,9 @@ import Data.Colour.Names (black, white)
 import Data.Monoid (mempty)
 import qualified Diagrams.Attributes as D
 import qualified Diagrams.Core as D
+import qualified Diagrams.Located as D
 import qualified Diagrams.Path as D
+import qualified Diagrams.Trail as D
 import qualified Diagrams.TwoD as D
 
 
@@ -30,7 +32,7 @@ stroke = D.bg white . quiet . D.fc black . D.lw 0 . D.stroke
 -- into a 'Path'.  'minBound' values are considered to be
 -- \"off\", while every other value is considered to be \"on\".
 pathList :: (Bounded a, Eq a, Integral ix) => [((ix, ix), a)] -> D.Path D.R2
-pathList = D.Path . fmap (p2int *** toTrail)
+pathList = D.Path . fmap (uncurry (flip D.at) . (p2int *** toTrail))
   where p2int = D.p2 . (fromIntegral *** fromIntegral)
 
 

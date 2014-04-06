@@ -18,4 +18,4 @@ main = do
   let dia = D.scale 6 $ QR.stroke $ QR.pathArray $ fmap not $ QR.toArray qrcode
 
   -- Render diagram
-  L8.putStrLn $ renderSvg $ D.renderDia D.SVG (D.SVGOptions D.Absolute) dia
+  L8.putStrLn $ renderSvg $ D.renderDia D.SVG (D.SVGOptions D.Absolute Nothing) dia
