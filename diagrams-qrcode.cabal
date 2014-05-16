@@ -37,7 +37,7 @@ library
   exposed-modules:
     Diagrams.QRCode
   build-depends:
-      base          >= 4.5 && < 4.7
+      base          >= 4.5 && < 4.8
     , array
     , colour
     , diagrams-core == 1.1.*
