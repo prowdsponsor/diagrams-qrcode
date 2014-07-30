@@ -5,7 +5,6 @@ import Control.Arrow ((***))
 import Data.Array (assocs, Array, Ix)
 import Data.Colour.Names (black, white)
 import Data.Monoid (mempty)
-import qualified Diagrams.Attributes as D
 import qualified Diagrams.Core as D
 import qualified Diagrams.Located as D
 import qualified Diagrams.Path as D
