@@ -1,4 +1,5 @@
-import Text.Blaze.Svg.Renderer.Utf8 (renderSvg)   -- blaze-svg
+{-# LANGUAGE OverloadedStrings #-}
+import Lucid.Svg (renderBS)                       -- lucid-svg
 import qualified Codec.Binary.QRCode as QR        -- qrcode
 import qualified Data.ByteString.Lazy.Char8 as L8 -- bytestring
 import qualified Diagrams.Backend.SVG as D        -- diagrams-svg
@@ -18,4 +19,4 @@ main = do
   let dia = D.scale 6 $ QR.stroke $ QR.pathArray $ fmap not $ QR.toArray qrcode
 
   -- Render diagram
-  L8.putStrLn $ renderSvg $ D.renderDia D.SVG (D.SVGOptions D.Absolute Nothing) dia
+  L8.putStrLn $ renderBS $ D.renderDia D.SVG (D.SVGOptions (D.mkWidth 250) Nothing "") dia
