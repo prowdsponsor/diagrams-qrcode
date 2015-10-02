@@ -1,5 +1,5 @@
 name:                diagrams-qrcode
-version:             1.2
+version:             1.3
 synopsis:            Draw QR codes to SVG, PNG, PDF or PS files.
 homepage:            https://github.com/prowdsponsor/diagrams-qrcode
 license:             BSD3
